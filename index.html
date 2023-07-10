@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animations Portfolio</title>
+    <link rel="stylesheet" href="./style.css" />
+    <style>
+      /* ...CSS styles... */
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-gap: 20px;
+        padding: 20px;
+      }
+
+      .card {
+        background-color: #f1f1f1;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .card img {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1>Animations Portfolio</h1>
+      </header>
+    </div>
+
+    <div class="grid-container">
+      <div class="card">
+        <img src="./images/interactive-balls-animation.png" alt="Animation 1" />
+        <h2>The Collision Craze:</h2>
+        <p>Description: This is a description of Animation 1.</p>
+        <p>Duration: 2 minutes</p>
+        <a href="./ball/index.html" target="_blank">click here</a>
+      </div>
+
+      <div class="card">
+        <img src="image2.jpg" alt="Animation 2" />
+        <h2>Animation 2</h2>
+        <p>Description: This is a description of Animation 2.</p>
+        <p>Duration: 1 minute</p>
+      </div>
+      <div class="card">
+        <img src="image2.jpg" alt="Animation 2" />
+        <h2>Animation 2</h2>
+        <p>Description: This is a description of Animation 2.</p>
+        <p>Duration: 1 minute</p>
+      </div>
+      <div class="card">
+        <img src="image2.jpg" alt="Animation 2" />
+        <h2>Animation 2</h2>
+        <p>Description: This is a description of Animation 2.</p>
+        <p>Duration: 1 minute</p>
+      </div>
+
+      <!-- Add more card elements for additional animations -->
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

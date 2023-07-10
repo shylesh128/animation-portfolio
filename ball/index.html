@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ball Animation</title>
+    <style>
+      #container {
+        position: relative;
+        width: 100%;
+        height: 500px;
+        border: 1px solid black;
+      }
+      .ball {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      #button-container {
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <div id="button-container">
+      <button onclick="addBall()">Add Ball</button>
+      <button onclick="resetBalls()">Reset</button>
+    </div>
+    <div id="ball-count">Balls: 0</div>
+    <div id="collision-count">Collisions: 0</div>
+
+    <script>
+      var container = document.getElementById("container");
+      var balls = [];
+      var maxBalls = 20; // Maximum number of balls allowed
+      var collisionCount = 0; // Collision count variable
+      var collisionThreshold = 200; // Number of collisions required before creating a new ball
+      var ballsCreated = 0; // Number of balls created
+
+      var containerWidth = container.offsetWidth;
+      var containerHeight = container.offsetHeight;
+      var maxX = containerWidth - 50;
+      var maxY = containerHeight - 50;
+
+      function getRandomColor() {
+        var letters = "0123456789ABCDEF";
+        var color = "#";
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+
+      function createBall() {
+        if (balls.length >= maxBalls) {
+          return null; // Limit reached, no new ball created
+        }
+
+        var ball = document.createElement("div");
+        ball.className = "ball";
+        ball.style.backgroundColor = getRandomColor();
+
+        var directionX = Math.random() > 0.5 ? 1 : -1;
+        var directionY = Math.random() > 0.5 ? 1 : -1;
+        var posX = Math.random() * maxX;
+        var posY = Math.random() * maxY;
+
+        ball.style.width = "20px";
+        ball.style.height = "20px";
+
+        container.appendChild(ball);
+
+        ball.addEventListener("click", function () {
+          removeBall(ball);
+        });
+
+        ball.addEventListener("mouseover", function () {
+          ball.style.backgroundColor = getRandomColor();
+          ball.style.transition = "background-color 0.5s ease";
+        });
+
+        ball.addEventListener("mouseout", function () {
+          ball.style.transition = "none";
+        });
+
+        function moveBall() {
+          posX += directionX;
+          posY += directionY;
+
+          if (posX <= 0 || posX >= maxX) {
+            directionX *= -1;
+          }
+
+          if (posY <= 0 || posY >= maxY) {
+            directionY *= -1;
+          }
+
+          for (var i = 0; i < balls.length; i++) {
+            if (balls[i] !== ball) {
+              var rect1 = ball.getBoundingClientRect();
+              var rect2 = balls[i].getBoundingClientRect();
+
+              var dx = rect1.left - rect2.left;
+              var dy = rect1.top - rect2.top;
+              var distance = Math.sqrt(dx * dx + dy * dy);
+
+              if (distance < 50) {
+                var angle = Math.atan2(dy, dx);
+                var targetX = rect1.left + Math.cos(angle) * 50;
+                var targetY = rect1.top + Math.sin(angle) * 50;
+
+                directionX = (targetX - rect1.left) / 10;
+                directionY = (targetY - rect1.top) / 10;
+
+                // Increment the collision count and update the display
+                collisionCount++;
+                updateCollisionCount();
+
+                if (
+                  collisionCount >= collisionThreshold &&
+                  ballsCreated < maxBalls
+                ) {
+                  // Create a new ball near the collision place
+                  var newBall = createBall();
+                  if (newBall !== null) {
+                    newBall.style.transform =
+                      "translate(" + targetX + "px," + targetY + "px)";
+                    ballsCreated++;
+                  }
+                  // Reset the collision count
+                  collisionCount = 0;
+                }
+              }
+            }
+          }
+
+          ball.style.transform = "translate(" + posX + "px," + posY + "px)";
+
+          requestAnimationFrame(moveBall);
+        }
+
+        moveBall();
+        balls.push(ball);
+        updateBallCount();
+        return ball;
+      }
+
+      function removeBall(ball) {
+        container.removeChild(ball);
+        balls = balls.filter(function (item) {
+          return item !== ball;
+        });
+        updateBallCount();
+      }
+
+      function updateBallCount() {
+        var ballCountElement = document.getElementById("ball-count");
+        ballCountElement.textContent = "Balls: " + balls.length;
+      }
+
+      function updateCollisionCount() {
+        var collisionCountElement = document.getElementById("collision-count");
+        collisionCountElement.textContent = "Collisions: " + collisionCount;
+      }
+
+      function addBall() {
+        createBall();
+      }
+
+      function resetBalls() {
+        const ballss = document.getElementsByClassName("ball");
+        while (balls.length > 0) {
+          var ball = balls.pop();
+          container.removeChild(ball);
+        }
+        // Reset the collision count
+        collisionCount = 0;
+        updateBallCount();
+        updateCollisionCount();
+      }
+
+      // Create multiple balls
+      for (var i = 0; i < 1; i++) {
+        createBall();
+      }
+    </script>
+  </body>
+</html>
