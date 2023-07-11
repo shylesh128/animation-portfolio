@@ -5,83 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Animations Portfolio</title>
     <link rel="stylesheet" href="./style.css" />
-    <style>
-      /* ...CSS styles... */
-      .grid-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        grid-gap: 20px;
-        padding: 20px;
-      }
-
-      .card {
-        background-color: #f1f1f1;
-        padding: 20px;
-        text-align: center;
-      }
-
-      .card img {
-        max-width: 100%;
-        height: auto;
-      }
-    </style>
   </head>
   <body>
     <div class="container">
       <header class="header">
         <h1>Animations Portfolio</h1>
+        <select id="theme-dropdown">
+          <option value="light">Light Mode</option>
+          <option value="dark">Dark Mode</option>
+          <option value="blue">Blue Mode</option>
+          <option value="custom">Custom Mode</option>
+        </select>
       </header>
     </div>
 
-    <div class="grid-container">
-      <div class="card">
-        <img src="./images/interactive-balls-animation.png" alt="Animation 1" />
-        <h2>The Collision Craze:</h2>
-        <p>Description: This is a description of Animation 1.</p>
-        <p>Duration: 2 minutes</p>
-        <a href="./ball/index.html" target="_blank">click here</a>
-      </div>
-
-      <div class="card">
-        <img src="./images/basic-cube.png" alt="Animation 2" />
-        <h2>Simple 3D cube</h2>
-        <p>Description: This is a description of Animation 2.</p>
-        <p>Duration: 1 minute</p>
-        <a href="./basic-cube/index.html" target="_blank">click here</a>
-      </div>
-
-      <div class="card">
-        <img src="./images/multiple-rubics.png" alt="Animation 2" />
-        <h2>3D Rubics cubes animation</h2>
-        <p>Description: This is a description of Animation 2.</p>
-        <p>Duration: 1 minute</p>
-        <a href="./multi/rubkis.html" target="_blank">click here</a>
-      </div>
-
-      <div class="card">
-        <img
-          src="./images/circles-circles.png"
-          alt="preview of circles animations"
-        />
-        <h2>click to paint</h2>
-        <p>Description: This is a description of Animation 2.</p>
-        <p>Duration: 1 minute</p>
-        <a href="./paint/index.html" target="_blank">click here</a>
-      </div>
-
-      <div class="card">
-        <img
-          src="./images/single-4x4-rubics.png"
-          alt="preview of 4 by 4 rubics animations"
-        />
-        <h2>Simple 4 by 4 rubiks cube</h2>
-        <p>Description: This is a description of Animation 2.</p>
-        <p>Duration: 1 minute</p>
-        <a href="./single-cube/index.html" target="_blank">click here</a>
-      </div>
-
-      <!-- Add more card elements for additional animations -->
-    </div>
+    <div class="grid-container"></div>
 
     <script src="./script.js"></script>
   </body>

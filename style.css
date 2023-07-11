@@ -1,3 +1,41 @@
+:root {
+  /* Light Mode */
+  --header-background: rgb(14, 52, 53);
+  --header-color: #ccc;
+  --body-background: #fff;
+  --body-color: #000;
+  --card-background: #f1f1f1;
+  --card-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --link-color: #007bff;
+
+  /* Dark Mode */
+  --dark-header-background: #222;
+  --dark-header-color: #eee;
+  --dark-body-background: #111;
+  --dark-body-color: #eee;
+  --dark-card-background: #444;
+  --dark-card-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  --dark-link-color: #4b8cff;
+
+  /* Blue Mode */
+  --blue-header-background: #002750;
+  --blue-header-color: #fff;
+  --blue-body-background: #f1f1f1;
+  --blue-body-color: #000;
+  --blue-card-background: #c8e2f7;
+  --blue-card-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+  --blue-link-color: #0056b3;
+
+  /* Custom Mode */
+  --custom-header-background: #3c003c;
+  --custom-header-color: #fff;
+  --custom-body-background: #f8f8f8;
+  --custom-body-color: #333;
+  --custom-card-background: #c989c9;
+  --custom-card-shadow: 0 2px 4px rgba(128, 0, 128, 0.3);
+  --custom-link-color: #3c003c;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -7,54 +45,167 @@
 body {
   font-family: Arial, sans-serif;
   transition: background-color 0.3s ease;
+  background-color: var(--body-background);
+  color: var(--body-color);
 }
 
+#theme-dropdown {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 16px; /* Adjust the font size to your preference */
+  padding: 8px; /* Add padding to improve the appearance */
+  border: none; /* Remove the default border */
+  border-radius: 4px; /* Add border radius for a rounded look */
+  background-color: var(
+    --card-background
+  ); /* Apply the desired background color */
+  color: var(--body-color); /* Set the text color */
+  box-shadow: var(--card-shadow); /* Apply the desired box shadow */
+}
 .header {
   text-align: center;
   margin-bottom: 40px;
-  background-color: rgb(14, 52, 53);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  color: #ccc;
+  background-color: var(--header-background);
+  box-shadow: var(--card-shadow);
+  color: var(--header-color);
+  padding: 10px; /* Add padding for better spacing */
 }
 
 .header h1 {
   font-size: 32px;
+  margin: 0; /* Remove default margin for better alignment */
+  padding: 10px 0; /* Add padding for better spacing */
 }
 
-/* Toggle Switch Styles */
-#toggle-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 20px;
+  padding: 20px;
 }
 
-#toggle-container label {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-  background-color: #ccc;
-  border-radius: 34px;
-  cursor: pointer;
+.card {
+  background-color: var(--card-background);
+  box-shadow: var(--card-shadow);
+  padding: 20px;
+  text-align: center;
+  border-radius: 8px;
 }
 
-#toggle-container label::after {
-  content: "";
-  position: absolute;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background-color: #fff;
-  top: 4px;
-  left: 4px;
-  transition: transform 0.3s ease;
+.card img {
+  max-width: 100%;
+  height: auto;
 }
 
-#toggle:checked + #toggle-label {
-  background-color: #4d4d4d;
+/* Anchor (Link) Styles */
+a {
+  color: var(--link-color);
+  text-decoration: none;
 }
 
-#toggle:checked + #toggle-label::after {
-  transform: translateX(26px);
+/* Themes */
+.dark-mode,
+.blue-mode,
+.custom-mode {
+  --current-mode: var(--header-background);
+  --current-color: var(--header-color);
+  --current-body: var(--body-background);
+  --current-body-color: var(--body-color);
+  --current-card: var(--card-background);
+  --current-card-shadow: var(--card-shadow);
+  --current-link: var(--link-color);
+}
+
+.dark-mode {
+  --current-mode: var(--dark-header-background);
+  --current-color: var(--dark-header-color);
+  --current-body: var(--dark-body-background);
+  --current-body-color: var(--dark-body-color);
+  --current-card: var(--dark-card-background);
+  --current-card-shadow: var(--dark-card-shadow);
+  --current-link: var(--dark-link-color);
+}
+
+.blue-mode {
+  --current-mode: var(--blue-header-background);
+  --current-color: var(--blue-header-color);
+  --current-body: var(--blue-body-background);
+  --current-body-color: var(--blue-body-color);
+  --current-card: var(--blue-card-background);
+  --current-card-shadow: var(--blue-card-shadow);
+  --current-link: var(--blue-link-color);
+}
+
+.custom-mode {
+  --current-mode: var(--custom-header-background);
+  --current-color: var(--custom-header-color);
+  --current-body: var(--custom-body-background);
+  --current-body-color: var(--custom-body-color);
+  --current-card: var(--custom-card-background);
+  --current-card-shadow: var(--custom-card-shadow);
+  --current-link: var(--custom-link-color);
+}
+
+body.dark-mode {
+  background-color: var(--current-body);
+  color: var(--current-body-color);
+}
+
+body.dark-mode .header {
+  background-color: var(--current-mode);
+  color: var(--current-color);
+}
+
+body.dark-mode .card {
+  background-color: var(--current-card);
+  box-shadow: var(--current-card-shadow);
+}
+
+body.dark-mode a {
+  color: var(--current-link);
+}
+
+body.blue-mode {
+  background-color: var(--current-body);
+  color: var(--current-body-color);
+}
+
+body.blue-mode .header {
+  background-color: var(--current-mode);
+  color: var(--current-color);
+}
+
+body.blue-mode .card {
+  background-color: var(--current-card);
+  box-shadow: var(--current-card-shadow);
+}
+
+body.blue-mode a {
+  color: var(--current-link);
+}
+
+body.custom-mode {
+  background-color: var(--current-body);
+  color: var(--current-body-color);
+}
+
+body.custom-mode .header {
+  background-color: var(--current-mode);
+  color: var(--current-color);
+}
+
+body.custom-mode .card {
+  background-color: var(--current-card);
+  box-shadow: var(--current-card-shadow);
+}
+
+body.custom-mode a {
+  color: var(--current-link);
+}
+
+@media (max-width: 768px) {
+  #theme-dropdown {
+    top: 50px;
+  }
 }
