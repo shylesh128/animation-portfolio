@@ -1,5 +1,13 @@
 var animations = [
   {
+    imageSrc: "./images/painter.png",
+    altText: "preview of 4 by 4 rubics animations",
+    title: "Simple paint tool",
+    description: "This is a description of Animation 2.",
+    duration: "1 minute",
+    link: "./painter/index.html",
+  },
+  {
     imageSrc: "./images/interactive-balls-animation.png",
     altText: "Animation 1",
     title: "The Collision Craze:",
@@ -39,6 +47,7 @@ var animations = [
     duration: "1 minute",
     link: "./single-cube/index.html",
   },
+
   // Add more objects for additional animations
 ];
 

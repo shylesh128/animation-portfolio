@@ -1,0 +1,145 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#container {
+  position: relative;
+  width: 100vw;
+  height: calc(100vh - 40px); /* Subtract the height of the controls */
+}
+
+#canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Adjust the spacing as needed */
+}
+
+#controls label,
+#controls select,
+#controls input[type="range"],
+#controls button {
+  margin-right: 10px;
+}
+
+#erase-menu {
+  display: none;
+  margin-left: 10px;
+}
+
+#erase-menu label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.active {
+  background-color: #ccc;
+}
+
+#background-toggle {
+  display: flex;
+  align-items: center;
+}
+
+#background-toggle label {
+  margin-right: 10px;
+}
+
+#background-toggle input[type="color"] {
+  display: none;
+  margin-right: 10px;
+}
+
+/* Dark mode styles */
+body.dark-mode {
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+}
+
+.dark-mode #controls {
+  background-color: #333;
+}
+
+.dark-mode #controls label,
+.dark-mode #controls select,
+.dark-mode #controls input[type="range"],
+.dark-mode #controls button {
+  color: #f0f0f0;
+}
+
+.dark-mode #controls button {
+  background-color: #444;
+  color: #f0f0f0;
+}
+
+.dark-mode #erase-menu label {
+  color: #f0f0f0;
+}
+
+.dark-mode option {
+  color: #ccc;
+  background-color: #333;
+}
+
+.dark-mode select {
+  color: #ccc;
+  background-color: #333;
+}
+
+.dark-mode #theme-toggle label,
+.dark-mode #theme-toggle select {
+  color: #f0f0f0;
+}
+
+.dark-mode #background-toggle input[type="color"] {
+  display: inline-block;
+}
+
+/* Light mode styles */
+body.light-mode {
+  background-color: #f0f0f0;
+  color: #1a1a1a;
+}
+
+.light-mode #controls {
+  background-color: #f0f0f0;
+}
+
+.light-mode #controls label,
+.light-mode #controls select,
+.light-mode #controls input[type="range"],
+.light-mode #controls button {
+  color: #1a1a1a;
+}
+
+.light-mode #controls button {
+  background-color: #ddd;
+  color: #1a1a1a;
+}
+
+.light-mode #erase-menu label {
+  color: #1a1a1a;
+}
+
+.light-mode #theme-toggle label,
+.light-mode #theme-toggle select {
+  color: #1a1a1a;
+}
+
+.light-mode #background-toggle input[type="color"] {
+  display: inline-block;
+}

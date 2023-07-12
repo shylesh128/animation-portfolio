@@ -1,23 +1,40 @@
 window.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
-  const circles = [];
+  const shapes = document.getElementById("shape");
+  const sizeInput = document.getElementById("size");
+  const downloadBtn = document.getElementById("download");
+  let circles = [];
 
   canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  canvas.height = window.innerHeight - 40; // Subtract the height of the controls
 
-  function Circle(x, y, radius) {
+  function Shape(x, y, size, shapeType) {
     this.x = x;
     this.y = y;
-    this.radius = radius;
+    this.size = size;
     this.color = getRandomColor();
+    this.shapeType = shapeType;
 
     this.draw = function () {
       ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+      if (this.shapeType === "circle") {
+        ctx.arc(this.x, this.y, this.size / 2, 0, Math.PI * 2, false);
+      } else if (this.shapeType === "square") {
+        ctx.rect(
+          this.x - this.size / 2,
+          this.y - this.size / 2,
+          this.size,
+          this.size
+        );
+      } else if (this.shapeType === "triangle") {
+        ctx.moveTo(this.x, this.y - this.size / 2);
+        ctx.lineTo(this.x + this.size / 2, this.y + this.size / 2);
+        ctx.lineTo(this.x - this.size / 2, this.y + this.size / 2);
+        ctx.closePath();
+      }
       ctx.fillStyle = this.color;
       ctx.fill();
-      ctx.closePath();
     };
   }
 
@@ -30,20 +47,21 @@ window.addEventListener("DOMContentLoaded", () => {
     return color;
   }
 
-  function addCircle(x, y) {
-    const radius = Math.random() * 50 + 10;
-    const circle = new Circle(x, y, radius);
-    circles.push(circle);
+  function addShape(x, y, size) {
+    const shapeType = shapes.value;
+    const shape = new Shape(x, y, size, shapeType);
+    circles.push(shape);
+    shape.draw();
   }
 
   function clearCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
 
-  function drawCircles() {
+  function drawShapes() {
     clearCanvas();
-    circles.forEach((circle) => {
-      circle.draw();
+    circles.forEach((shape) => {
+      shape.draw();
     });
   }
 
@@ -52,30 +70,29 @@ window.addEventListener("DOMContentLoaded", () => {
     const mouseX = e.clientX - rect.left;
     const mouseY = e.clientY - rect.top;
 
-    addCircle(mouseX, mouseY);
-    drawCircles();
-  }
-
-  function handleMouseMove(e) {
-    if (e.buttons !== 1) {
-      return;
-    }
-
-    const rect = canvas.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-
-    addCircle(mouseX, mouseY);
-    drawCircles();
+    addShape(mouseX, mouseY, sizeInput.value);
   }
 
   function handleResize() {
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    drawCircles();
+    canvas.height = window.innerHeight - 40; // Subtract the height of the controls
+    drawShapes();
   }
 
+  function downloadImage() {
+    const link = document.createElement("a");
+    link.href = canvas.toDataURL();
+    link.download = "canvas_image.png";
+    link.click();
+  }
+
+  shapes.addEventListener("change", () => {
+    drawShapes();
+  });
+
   window.addEventListener("mousedown", handleMouseDown);
-  window.addEventListener("mousemove", handleMouseMove);
   window.addEventListener("resize", handleResize);
+  downloadBtn.addEventListener("click", downloadImage);
+
+  drawShapes();
 });

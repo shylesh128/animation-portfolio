@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+  </head>
+  <body class="dark-mode">
+    <div id="container">
+      <canvas id="canvas"></canvas>
+    </div>
+    <div id="controls">
+      <label for="shape">Shape:</label>
+      <select id="shape">
+        <option value="circle">Circle</option>
+        <option value="erase">erase</option>
+        <option value="square">Square</option>
+        <option value="triangle">Triangle</option>
+        <option value="pentagon">Pentagon</option>
+        <option value="hexagon">Hexagon</option>
+        <option value="star">Star</option>
+        <option value="heart">Heart</option>
+        <option value="diamond">Diamond</option>
+        <option value="ellipse">Ellipse</option>
+        <option value="rectangle">Rectangle</option>
+        <option value="oval">Oval</option>
+        <option value="line">Line</option>
+        <option value="rounded-rectangle">Rounded Rectangle</option>
+        <option value="arrow">Arrow</option>
+        <option value="spiral">Spiral</option>
+        <option value="cloud">Cloud</option>
+        <option value="starburst">Starburst</option>
+        <option value="octagon">Octagon</option>
+        <option value="crescent">Crescent</option>
+        <option value="cross">Cross</option>
+      </select>
+
+      <button id="erase">Erase options</button>
+
+      <div id="erase-menu">
+        <label for="erase-size">Erase Radius:</label>
+        <input type="range" id="erase-size" min="10" max="200" step="1" />
+
+        <label for="erase-color">Erase Color:</label>
+        <input type="color" id="erase-color" />
+      </div>
+
+      <button id="download">Download</button>
+
+      <div id="theme-toggle">
+        <label for="theme-select">Theme:</label>
+        <select id="theme-select">
+          <option value="dark">Dark</option>
+          <option value="light">Light</option>
+        </select>
+      </div>
+      <div id="background-toggle">
+        <label for="background-select">Background:</label>
+        <select id="background-select">
+          <option value="white">White</option>
+          <option value="black">Black</option>
+          <option value="custom">Custom</option>
+        </select>
+        <input type="color" id="background-color" />
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
