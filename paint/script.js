@@ -1,38 +1,21 @@
 window.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
-  const shapes = document.getElementById("shape");
-  const sizeInput = document.getElementById("size");
   const downloadBtn = document.getElementById("download");
   let circles = [];
 
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight - 40; // Subtract the height of the controls
 
-  function Shape(x, y, size, shapeType) {
+  function Circle(x, y, size) {
     this.x = x;
     this.y = y;
-    this.size = size;
+    this.size = getRandomSize();
     this.color = getRandomColor();
-    this.shapeType = shapeType;
 
     this.draw = function () {
       ctx.beginPath();
-      if (this.shapeType === "circle") {
-        ctx.arc(this.x, this.y, this.size / 2, 0, Math.PI * 2, false);
-      } else if (this.shapeType === "square") {
-        ctx.rect(
-          this.x - this.size / 2,
-          this.y - this.size / 2,
-          this.size,
-          this.size
-        );
-      } else if (this.shapeType === "triangle") {
-        ctx.moveTo(this.x, this.y - this.size / 2);
-        ctx.lineTo(this.x + this.size / 2, this.y + this.size / 2);
-        ctx.lineTo(this.x - this.size / 2, this.y + this.size / 2);
-        ctx.closePath();
-      }
+      ctx.arc(this.x, this.y, this.size / 2, 0, Math.PI * 2, false);
       ctx.fillStyle = this.color;
       ctx.fill();
     };
@@ -47,21 +30,20 @@ window.addEventListener("DOMContentLoaded", () => {
     return color;
   }
 
-  function addShape(x, y, size) {
-    const shapeType = shapes.value;
-    const shape = new Shape(x, y, size, shapeType);
-    circles.push(shape);
-    shape.draw();
+  function addCircle(x, y, size) {
+    const circle = new Circle(x, y, size);
+    circles.push(circle);
+    circle.draw();
   }
 
   function clearCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
 
-  function drawShapes() {
+  function drawCircles() {
     clearCanvas();
-    circles.forEach((shape) => {
-      shape.draw();
+    circles.forEach((circle) => {
+      circle.draw();
     });
   }
 
@@ -70,13 +52,34 @@ window.addEventListener("DOMContentLoaded", () => {
     const mouseX = e.clientX - rect.left;
     const mouseY = e.clientY - rect.top;
 
-    addShape(mouseX, mouseY, sizeInput.value);
+    const size = Math.random() * 100 + 10; // Random size between 10 and 110
+
+    addCircle(mouseX, mouseY, size);
+
+    function handleMouseMove(e) {
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+
+      addCircle(mouseX, mouseY, size);
+    }
+
+    function handleMouseUp() {
+      canvas.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    }
+
+    canvas.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
   }
 
   function handleResize() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight - 40; // Subtract the height of the controls
-    drawShapes();
+    drawCircles();
+  }
+
+  function getRandomSize() {
+    return Math.floor(Math.random() * 100) + 50; // Random size between 20 and 120
   }
 
   function downloadImage() {
@@ -86,13 +89,9 @@ window.addEventListener("DOMContentLoaded", () => {
     link.click();
   }
 
-  shapes.addEventListener("change", () => {
-    drawShapes();
-  });
-
   window.addEventListener("mousedown", handleMouseDown);
   window.addEventListener("resize", handleResize);
   downloadBtn.addEventListener("click", downloadImage);
 
-  drawShapes();
+  drawCircles();
 });
