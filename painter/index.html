@@ -22,7 +22,7 @@
         <option value="ellipse">Ellipse</option>
         <option value="rectangle">Rectangle</option>
         <option value="oval">Oval</option>
-        <option value="line">Line</option>
+        <option value="line">Spikes</option>
         <option value="rounded-rectangle">Rounded Rectangle</option>
         <option value="arrow">Arrow</option>
         <option value="spiral">Spiral</option>
@@ -31,7 +31,25 @@
         <option value="octagon">Octagon</option>
         <option value="crescent">Crescent</option>
         <option value="cross">Cross</option>
+        <option value="butterfly">Butter Fly</option>
       </select>
+
+      <input type="radio" name="tool" id="brush" value="brush" />
+      <label for="brush">Single</label>
+      <input type="radio" name="tool" id="pen" value="pen" checked />
+      <label for="pen">Brust</label>
+      <input type="radio" name="tool" id="pencil" value="pencil" />
+      <label for="pencil">Pencil</label>
+
+      <label for="shape-size">Shape size:</label>
+      <input
+        type="range"
+        id="shape-size"
+        min="0"
+        max="500"
+        step="1"
+        value="0"
+      />
 
       <button id="erase">Erase options</button>
 
@@ -63,7 +81,9 @@
 
       <button id="download">Download</button>
     </div>
-
+    <script src="./util.js" defer></script>
     <script src="./script.js"></script>
+    <script src="./dragable.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/interactjs@1.10.11"></script>
   </body>
 </html>

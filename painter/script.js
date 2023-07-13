@@ -6,7 +6,30 @@ window.addEventListener("DOMContentLoaded", () => {
   const eraseSizeInput = document.getElementById("erase-size");
   const eraseColorInput = document.getElementById("erase-color");
   const downloadBtn = document.getElementById("download");
+  const shapeSize = document.getElementById("shape-size");
+  const brushes = document.getElementsByName("tool");
   const shapes = [];
+  let currentTool = "pen";
+  let isDrawing = false;
+
+  brushes.forEach((brush) => {
+    brush.addEventListener("change", handleToolChange);
+  });
+
+  function setCanvasCursor() {
+    if (currentTool === "pencil") {
+      canvas.style.cursor = "crosshair";
+    } else if (currentTool === "pen") {
+      canvas.style.cursor = "default";
+    } else {
+      canvas.style.cursor = "crosshair";
+    }
+  }
+
+  function handleToolChange() {
+    currentTool = this.value;
+    setCanvasCursor();
+  }
 
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight - 40;
@@ -15,8 +38,9 @@ window.addEventListener("DOMContentLoaded", () => {
     constructor(x, y, type) {
       this.x = x;
       this.y = y;
-      this.color = getRandomColor();
-      this.size = getRandomSize();
+      this.color = window.getRandomColor();
+      this.size =
+        shapeSize.value > 0 ? shapeSize.value : window.getRandomSize();
       this.type = type;
     }
 
@@ -86,24 +110,13 @@ window.addEventListener("DOMContentLoaded", () => {
         drawCrescent(this.x, this.y, this.size);
       } else if (this.type === "cross") {
         drawCross(this.x, this.y, this.size, this.color);
+      } else if (this.type === "butterfly") {
+        drawButterFly(this.x, this.y, this.size);
       }
 
       ctx.fillStyle = this.color;
       ctx.fill();
     }
-  }
-
-  function getRandomSize() {
-    return Math.floor(Math.random() * 100) + 20; // Random size between 20 and 120
-  }
-
-  function getRandomColor() {
-    const letters = "0123456789ABCDEF";
-    let color = "#";
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
   }
 
   function drawPolygon(x, y, radius, sides) {
@@ -140,23 +153,44 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   function drawHeart(x, y, size) {
-    const controlPoint = size * 0.8;
-    ctx.moveTo(x, y - size * 0.8);
+    const curveHeight = size;
+    const curveWidth = size;
+
+    ctx.moveTo(x, y - size * 0.5);
+    ctx.quadraticCurveTo(x + curveWidth, y - curveHeight, x, y + size * 0.5);
+    ctx.quadraticCurveTo(x - curveWidth, y - curveHeight, x, y - size * 0.5);
+    ctx.closePath();
+  }
+
+  function drawButterFly(x, y, size) {
+    const controlPoint = size * 0.3;
+    const halfSize = size * 0.5;
+
+    ctx.moveTo(x, y - halfSize);
     ctx.bezierCurveTo(
       x + controlPoint,
-      y - controlPoint,
-      x + controlPoint,
-      y + controlPoint * 0.2,
-      x,
-      y + size * 0.4
+      y - size,
+      x + size,
+      y - size,
+      x + size,
+      y - halfSize
+    );
+    ctx.bezierCurveTo(x + size, y, x + halfSize, y + size, x, y + halfSize);
+    ctx.bezierCurveTo(
+      x - halfSize,
+      y + size,
+      x - size,
+      y,
+      x - size,
+      y - halfSize
     );
     ctx.bezierCurveTo(
+      x - size,
+      y - size,
       x - controlPoint,
-      y + controlPoint * 0.2,
-      x - controlPoint,
-      y - controlPoint,
+      y - size,
       x,
-      y - size * 0.8
+      y - halfSize
     );
   }
 
@@ -316,12 +350,23 @@ window.addEventListener("DOMContentLoaded", () => {
     const mouseX = e.clientX - rect.left;
     const mouseY = e.clientY - rect.top;
 
-    addShape(mouseX, mouseY);
-    drawShapes();
+    if (currentTool === "brush") {
+      isDrawing = true;
+      addShape(mouseX, mouseY);
+      drawShapes();
+    } else if (currentTool === "pen") {
+      isDrawing = true;
+      addShape(mouseX, mouseY);
+      drawShapes();
+    } else if (currentTool === "pencil") {
+      ctx.beginPath();
+      ctx.moveTo(mouseX, mouseY);
+      isDrawing = true;
+    }
   }
 
   function handleMouseMove(e) {
-    if (e.buttons !== 1) {
+    if (!isDrawing) {
       return;
     }
 
@@ -329,8 +374,17 @@ window.addEventListener("DOMContentLoaded", () => {
     const mouseX = e.clientX - rect.left;
     const mouseY = e.clientY - rect.top;
 
-    addShape(mouseX, mouseY);
-    drawShapes();
+    if (currentTool === "pen") {
+      addShape(mouseX, mouseY);
+      drawShapes();
+    } else if (currentTool === "pencil") {
+      ctx.lineTo(mouseX, mouseY);
+      ctx.stroke();
+    }
+  }
+
+  function handleMouseUp() {
+    isDrawing = false;
   }
 
   function handleResize() {
@@ -397,6 +451,7 @@ window.addEventListener("DOMContentLoaded", () => {
     eraseColorInput.addEventListener("input", drawShapes);
     canvas.addEventListener("mousedown", handleMouseDown);
     canvas.addEventListener("mousemove", handleMouseMove);
+    canvas.addEventListener("mouseup", handleMouseUp);
 
     window.addEventListener("resize", handleResize);
     downloadBtn.addEventListener("click", downloadImage);
