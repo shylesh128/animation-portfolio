@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JavaScript code complier</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="container">
+      <div id="code-editor">
+        <textarea
+          id="code"
+          placeholder="Enter your code here..."
+          spellcheck="false"
+          oninput="updateLineNumbers()"
+        ></textarea>
+
+        <div id="suggestions" class="suggestions"></div>
+        <div class="buttons">
+          <button onclick="runCode()">Run</button>
+          <button onclick="openSaveDialog()">Save</button>
+          <button onclick="formatCode()">Format</button>
+          <button id="sequential-tip-button">Tip</button>
+          <button
+            id="hide-terminal-button"
+            onclick="toggleTerminalVisibility()"
+          >
+            Terminal
+          </button>
+        </div>
+        <div id="tip-container">
+          <button id="close-tip-button" onclick="closeTip()">&times;</button>
+          <h3 id="tip-heading">JavaScript Tip</h3>
+          <p id="tip-description"></p>
+          <pre id="tip-code-example"><code></code></pre>
+          <button id="copy-button" onclick="copyToClipboard()">
+            Copy to Clipboard
+          </button>
+        </div>
+      </div>
+
+      <div id="terminal-container">
+        <div id="terminal"></div>
+      </div>
+    </div>
+
+    <div id="save-dialog" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeSaveDialog()">&times;</span>
+        <label for="file-name-input">File Name:</label>
+        <input
+          type="text"
+          id="file-name-input"
+          placeholder="Enter file name..."
+        />
+        <button onclick="saveCode()">Save</button>
+      </div>
+    </div>
+
+    <script src="./scripts/tips.js"></script>
+    <script src="./scripts/const.js"></script>
+    <script src="./scripts/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-beautify/js/lib/beautify.js"></script>
+  </body>
+</html>

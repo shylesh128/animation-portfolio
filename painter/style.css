@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
+  font-family: "Poppins", sans-serif;
 }
 
 #container {
@@ -24,20 +25,28 @@ body {
 
 #controls {
   display: flex;
-  align-items: center;
-  justify-content: space-evenly;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
   height: auto;
-  cursor: move;
-  user-select: none;
 }
 
-#controls label,
-#controls select,
-#controls input[type="range"],
-#controls button {
-  margin-right: 10px;
+.control-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.control-group-1 {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.control-group > label {
+  margin-right: 5px;
 }
 
 #erase-menu {
@@ -45,27 +54,60 @@ body {
   margin-left: 10px;
 }
 
-#erase-menu label {
-  display: block;
+#erase-menu .control-group {
   margin-bottom: 5px;
 }
 
-.active {
-  background-color: #ccc;
-}
-
-#background-toggle {
+#background-toggle .control-group {
   display: flex;
   align-items: center;
 }
 
-#background-toggle label {
-  margin-right: 10px;
+#background-toggle .control-group > label {
+  margin-right: 5px;
 }
 
 #background-toggle input[type="color"] {
   display: none;
-  margin-right: 10px;
+  margin-right: 5px;
+}
+
+button,
+select,
+input[type="range"] {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #3498db;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover,
+select:hover,
+input[type="range"]:hover {
+  background-color: #2980b9;
+}
+
+button:focus,
+select:focus,
+input[type="range"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.5);
+}
+
+input[type="range"] {
+  width: 150px;
+  margin-left: 10px;
+}
+
+input[type="color"] {
+  padding: 0;
+  width: 30px;
+  height: 30px;
 }
 
 /* Dark mode styles */
@@ -78,7 +120,7 @@ body.dark-mode {
   background-color: #333;
 }
 
-.dark-mode #controls label,
+.dark-mode #controls .control-group > label,
 .dark-mode #controls select,
 .dark-mode #controls input[type="range"],
 .dark-mode #controls button {
@@ -87,10 +129,9 @@ body.dark-mode {
 
 .dark-mode #controls button {
   background-color: #444;
-  color: #f0f0f0;
 }
 
-.dark-mode #erase-menu label {
+.dark-mode #erase-menu .control-group > label {
   color: #f0f0f0;
 }
 
@@ -104,7 +145,7 @@ body.dark-mode {
   background-color: #333;
 }
 
-.dark-mode #theme-toggle label,
+.dark-mode #theme-toggle .control-group > label,
 .dark-mode #theme-toggle select {
   color: #f0f0f0;
 }
@@ -123,7 +164,7 @@ body.light-mode {
   background-color: #f0f0f0;
 }
 
-.light-mode #controls label,
+.light-mode #controls .control-group > label,
 .light-mode #controls select,
 .light-mode #controls input[type="range"],
 .light-mode #controls button {
@@ -132,18 +173,78 @@ body.light-mode {
 
 .light-mode #controls button {
   background-color: #ddd;
+}
+
+.light-mode #erase-menu .control-group > label {
   color: #1a1a1a;
 }
 
-.light-mode #erase-menu label {
-  color: #1a1a1a;
-}
-
-.light-mode #theme-toggle label,
+.light-mode #theme-toggle .control-group > label,
 .light-mode #theme-toggle select {
   color: #1a1a1a;
 }
 
 .light-mode #background-toggle input[type="color"] {
   display: inline-block;
+}
+
+.disabled-input {
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.control-group-left {
+  display: flex;
+  gap: 2rem;
+}
+
+input[type="number"] {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+input[type="number"]:hover {
+  background-color: #f0f0f0;
+}
+
+input[type="number"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.5);
+}
+
+input[type="checkbox"] {
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+/* Dark mode styles */
+body.dark-mode input[type="number"] {
+  background-color: #333;
+  color: #f0f0f0;
+}
+
+body.dark-mode input[type="number"]:hover {
+  background-color: #444;
+}
+
+body.dark-mode input[type="checkbox"] {
+  color: #f0f0f0;
+}
+
+/* Light mode styles */
+body.light-mode input[type="number"] {
+  background-color: #f0f0f0;
+  color: #1a1a1a;
+}
+
+body.light-mode input[type="number"]:hover {
+  background-color: #ddd;
+}
+
+body.light-mode input[type="checkbox"] {
+  color: #1a1a1a;
 }

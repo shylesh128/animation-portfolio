@@ -1,49 +1,64 @@
 var animations = [
   {
+    imageSrc: "./images/code-editor.png",
+    altText: "JavaScript Code Compiler Preview",
+    title: "JavaScript Code Compiler",
+    description:
+      "Compile and run JavaScript code with ease using our simple code editor. Test your programming skills and see instant results!",
+    duration: "1 minute",
+    link: "./code-editor-js/index.html",
+  },
+  {
     imageSrc: "./images/painter.png",
-    altText: "preview of 4 by 4 rubics animations",
-    title: "Simple paint tool",
-    description: "This is a description of Animation 2.",
+    altText: "Paint Tool Preview",
+    title: "Paint Tool",
+    description:
+      "Unleash your creativity with our easy-to-use paint tool. Create beautiful digital artwork and let your imagination soar!",
     duration: "1 minute",
     link: "./painter/index.html",
   },
   {
     imageSrc: "./images/interactive-balls-animation.png",
-    altText: "Animation 1",
-    title: "The Collision Craze:",
-    description: "This is a description of Animation 1.",
+    altText: "Animation: The Collision Craze",
+    title: "The Collision Craze",
+    description:
+      "Watch an exciting animation of balls colliding, bouncing, and creating fascinating patterns. It's a visual treat for all!",
     duration: "2 minutes",
     link: "./ball/index.html",
   },
   {
     imageSrc: "./images/basic-cube.png",
-    altText: "Animation 2",
-    title: "Simple 3D cube",
-    description: "This is a description of Animation 2.",
+    altText: "Simple 3D Cube Preview",
+    title: "3D Cube",
+    description:
+      "Explore a rotating 3D cube in a basic yet mesmerizing animation. Discover the magic of simple 3D graphics!",
     duration: "1 minute",
     link: "./basic-cube/index.html",
   },
   {
     imageSrc: "./images/multiple-rubics.png",
-    altText: "Animation 2",
-    title: "3D Rubics cubes animation",
-    description: "This is a description of Animation 2.",
+    altText: "Animation: 3D Rubik's Cubes",
+    title: "3D Rubik's Cubes",
+    description:
+      "Witness multiple Rubik's cubes twisting and turning in a captivating animation. It's a delight for puzzle enthusiasts!",
     duration: "1 minute",
     link: "./multi/rubkis.html",
   },
   {
     imageSrc: "./images/circles-circles.png",
-    altText: "preview of circles animations",
-    title: "click to paint",
-    description: "This is a description of Animation 2.",
+    altText: "Circles Animation Preview",
+    title: "Circles spray",
+    description:
+      "Experience the joy of painting with clicks in a mesmerizing animation of colorful circles. Create your own abstract masterpiece!",
     duration: "1 minute",
     link: "./paint/index.html",
   },
   {
     imageSrc: "./images/single-4x4-rubics.png",
-    altText: "preview of 4 by 4 rubics animations",
-    title: "Simple 4 by 4 rubiks cube",
-    description: "This is a description of Animation 2.",
+    altText: "Preview: 4x4 Rubik's Cube",
+    title: "4x4 Rubik's Cube",
+    description:
+      "Challenge yourself with a 4x4 Rubik's cube and unravel its secrets. Can you solve this classic puzzle?",
     duration: "1 minute",
     link: "./single-cube/index.html",
   },
@@ -64,10 +79,10 @@ function addCard(imageSrc, altText, title, description, duration, link) {
   heading.textContent = title;
 
   var descParagraph = document.createElement("p");
-  descParagraph.textContent = "Description: " + description;
+  descParagraph.textContent = description;
 
-  var durationParagraph = document.createElement("p");
-  durationParagraph.textContent = "Duration: " + duration;
+  // var durationParagraph = document.createElement("p");
+  // durationParagraph.textContent = "Duration: " + duration;
 
   // Create a click event listener on the card container
   cardContainer.addEventListener("click", function () {
@@ -78,7 +93,7 @@ function addCard(imageSrc, altText, title, description, duration, link) {
   cardContainer.appendChild(image);
   cardContainer.appendChild(heading);
   cardContainer.appendChild(descParagraph);
-  cardContainer.appendChild(durationParagraph);
+  // cardContainer.appendChild(durationParagraph);
 
   // Append the card container to the grid container
   var gridContainer = document.querySelector(".grid-container");
@@ -155,10 +170,7 @@ function setTheme(theme) {
 }
 
 function setSystemDefaultTheme() {
-  const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
-  setTheme(systemTheme);
+  setTheme("blue");
 }
 
 themeDropdown.addEventListener("change", function () {
@@ -172,5 +184,4 @@ themeDropdown.addEventListener("change", function () {
   }
 });
 
-// Set initial theme based on system default
 setSystemDefaultTheme();

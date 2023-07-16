@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,900&family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
 :root {
   /* Light Mode */
   --header-background: rgb(14, 52, 53);
@@ -35,53 +37,86 @@
   --custom-card-shadow: 0 2px 4px rgba(128, 0, 128, 0.3);
   --custom-link-color: #3c003c;
 }
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Poppins", "Roboto", sans-serif;
   transition: background-color 0.3s ease;
   background-color: var(--body-background);
   color: var(--body-color);
 }
 
-#theme-dropdown {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 16px; /* Adjust the font size to your preference */
-  padding: 8px; /* Add padding to improve the appearance */
-  border: none; /* Remove the default border */
-  border-radius: 4px; /* Add border radius for a rounded look */
-  background-color: var(
-    --card-background
-  ); /* Apply the desired background color */
-  color: var(--body-color); /* Set the text color */
-  box-shadow: var(--card-shadow); /* Apply the desired box shadow */
-}
-.header {
+.container {
+  margin: 20px auto;
+  max-width: 800px;
   text-align: center;
-  margin-bottom: 40px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: var(--header-background);
-  box-shadow: var(--card-shadow);
   color: var(--header-color);
-  padding: 10px; /* Add padding for better spacing */
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .header h1 {
-  font-size: 32px;
-  margin: 0; /* Remove default margin for better alignment */
-  padding: 10px 0; /* Add padding for better spacing */
+  font-size: 28px;
+  margin: 0;
+}
+
+.theme-dropdown {
+  position: relative;
+  font-size: 16px;
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--card-background);
+  color: var(--body-color);
+  box-shadow: var(--card-shadow);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.theme-dropdown::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-left: 2px solid var(--body-color);
+  border-bottom: 2px solid var(--body-color);
+  transition: transform 0.3s ease;
+  pointer-events: none;
+}
+
+.theme-dropdown:focus {
+  outline: none;
+}
+
+.theme-dropdown:hover::after {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.theme-dropdown option {
+  background-color: var(--card-background);
+  color: var(--body-color);
 }
 
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-gap: 20px;
+  grid-gap: 40px;
   padding: 20px;
 }
 
@@ -91,121 +126,61 @@ body {
   padding: 20px;
   text-align: center;
   border-radius: 8px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  text-align: start;
+}
+
+.card:hover {
+  transform: scale(1.02);
 }
 
 .card img {
   max-width: 100%;
   height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
 }
 
-/* Anchor (Link) Styles */
-a {
+.card h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.card p {
+  margin-bottom: 10px;
+}
+
+.card a {
   color: var(--link-color);
   text-decoration: none;
+  font-weight: bold;
 }
 
-/* Themes */
-.dark-mode,
-.blue-mode,
-.custom-mode {
-  --current-mode: var(--header-background);
-  --current-color: var(--header-color);
-  --current-body: var(--body-background);
-  --current-body-color: var(--body-color);
-  --current-card: var(--card-background);
-  --current-card-shadow: var(--card-shadow);
-  --current-link: var(--link-color);
-}
-
-.dark-mode {
-  --current-mode: var(--dark-header-background);
-  --current-color: var(--dark-header-color);
-  --current-body: var(--dark-body-background);
-  --current-body-color: var(--dark-body-color);
-  --current-card: var(--dark-card-background);
-  --current-card-shadow: var(--dark-card-shadow);
-  --current-link: var(--dark-link-color);
-}
-
-.blue-mode {
-  --current-mode: var(--blue-header-background);
-  --current-color: var(--blue-header-color);
-  --current-body: var(--blue-body-background);
-  --current-body-color: var(--blue-body-color);
-  --current-card: var(--blue-card-background);
-  --current-card-shadow: var(--blue-card-shadow);
-  --current-link: var(--blue-link-color);
-}
-
-.custom-mode {
-  --current-mode: var(--custom-header-background);
-  --current-color: var(--custom-header-color);
-  --current-body: var(--custom-body-background);
-  --current-body-color: var(--custom-body-color);
-  --current-card: var(--custom-card-background);
-  --current-card-shadow: var(--custom-card-shadow);
-  --current-link: var(--custom-link-color);
-}
-
-body.dark-mode {
-  background-color: var(--current-body);
-  color: var(--current-body-color);
-}
-
-body.dark-mode .header {
-  background-color: var(--current-mode);
-  color: var(--current-color);
-}
-
-body.dark-mode .card {
-  background-color: var(--current-card);
-  box-shadow: var(--current-card-shadow);
-}
-
-body.dark-mode a {
-  color: var(--current-link);
-}
-
-body.blue-mode {
-  background-color: var(--current-body);
-  color: var(--current-body-color);
-}
-
-body.blue-mode .header {
-  background-color: var(--current-mode);
-  color: var(--current-color);
-}
-
-body.blue-mode .card {
-  background-color: var(--current-card);
-  box-shadow: var(--current-card-shadow);
-}
-
-body.blue-mode a {
-  color: var(--current-link);
-}
-
-body.custom-mode {
-  background-color: var(--current-body);
-  color: var(--current-body-color);
-}
-
-body.custom-mode .header {
-  background-color: var(--current-mode);
-  color: var(--current-color);
-}
-
-body.custom-mode .card {
-  background-color: var(--current-card);
-  box-shadow: var(--current-card-shadow);
-}
-
-body.custom-mode a {
-  color: var(--current-link);
+.card a:hover {
+  text-decoration: underline;
 }
 
 @media (max-width: 768px) {
-  #theme-dropdown {
-    top: 50px;
+  .header {
+    flex-direction: column;
   }
+
+  .theme-dropdown {
+    margin-top: 10px;
+    width: 100%;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgb(255, 255, 255);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--header-background);
+  border-radius: 4px;
 }
