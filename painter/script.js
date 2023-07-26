@@ -143,6 +143,8 @@ window.addEventListener("DOMContentLoaded", () => {
         drawArrow(this.x, this.y, this.size, this.color);
       } else if (this.type === "spiral") {
         drawSpiral(this.x, this.y, this.size);
+      } else if (this.type === "splash") {
+        drawSplash(this.x, this.y, this.size, this.color);
       } else if (this.type === "cloud") {
         drawCloud(this.x, this.y, this.size);
       } else if (this.type === "starburst") {
@@ -314,6 +316,42 @@ window.addEventListener("DOMContentLoaded", () => {
       ctx.quadraticCurveTo(innerX, innerY, outerX, outerY);
     }
     ctx.closePath();
+  }
+
+  function drawSplash(x, y, size, color) {
+    ctx.beginPath();
+    ctx.arc(x, y, size * 0.3, 0, Math.PI * 2);
+    ctx.closePath();
+    ctx.fillStyle = color;
+    ctx.fill();
+
+    const amplitudes = [20];
+
+    ctx.beginPath();
+
+    for (let angle = 0; angle <= Math.PI * 2; angle += 0.05) {
+      const halfWaveIndex = Math.floor(Math.PI);
+      let amplitudeIndex = halfWaveIndex % amplitudes.length;
+
+      if (
+        angle > 0 &&
+        halfWaveIndex > 0 &&
+        amplitudes[amplitudeIndex] === amplitudes[amplitudeIndex - 1]
+      ) {
+        amplitudeIndex = (amplitudeIndex + 1) % amplitudes.length;
+      }
+
+      const amplitude = amplitudes[amplitudeIndex];
+      const newX =
+        x + Math.cos(angle) * (size + Math.sin(angle * 8) * amplitude);
+      const newY =
+        y + Math.sin(angle) * (size + Math.sin(angle * 8) * amplitude);
+
+      ctx.lineTo(newX, newY);
+    }
+
+    ctx.fillStyle = color;
+    ctx.fill();
   }
 
   function drawStarburst(x, y, size) {

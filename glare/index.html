@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        background-color: black;
+      }
+      .flare-line {
+        position: absolute;
+        width: 50px;
+        height: 2px; /* Adjust the height to change the thickness of the line */
+        background: linear-gradient(
+          to right,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0.9) 10%,
+          rgba(255, 255, 255, 0.9) 10%,
+          rgba(255, 255, 255, 0) 100%
+        );
+        animation: flareLineAnimation 3.5s linear;
+        transform-origin: center;
+      }
+
+      @keyframes flareLineAnimation {
+        0% {
+          transform: scaleX(0.1);
+        }
+        50% {
+          transform: scaleX(0.6);
+        }
+        80% {
+          transform: scaleX(0.9);
+        }
+        100% {
+          transform: scaleX(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      function createFlareLine(x, y, size) {
+        const flareContainer = document.createElement("div");
+        flareContainer.id = "flareContainer";
+        document.body.appendChild(flareContainer);
+
+        const flare = document.createElement("div");
+        flare.className = "flare-line";
+        flare.style.width = size + "px";
+        flare.style.left = x - size / 2 + "px";
+        flare.style.top = y - 1 + "px"; /* Center the line vertically */
+        flareContainer.appendChild(flare);
+      }
+
+      createFlareLine(
+        344,
+        245,
+        100
+      ); /* Adjust the size parameter to change the length of the line */
+    </script>
+  </body>
+</html>

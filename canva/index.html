@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Canvas Compiler</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+    <div id="container">
+      <div id="code-editor">
+        <textarea id="code" spellcheck="false"></textarea>
+        <div id="suggestions-container">
+          <div>
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Search suggestions..."
+              oninput="filterSuggestions()"
+            />
+          </div>
+
+          <div id="suggestions"></div>
+        </div>
+        <div>
+          <button onclick="clearCanvas()">Clear</button>
+          <button onclick="refreshCanvas()">Run</button>
+          <button onclick="formatCode()">Format</button>
+          <button onclick="showSuggestionsToggle()">Snippets</button>
+          <button onclick="downloadCanvas()">Download Canvas</button>
+        </div>
+      </div>
+      <div id="canvas-container">
+        <canvas id="canvas" width="500" height="500"></canvas>
+      </div>
+    </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.8/beautify.min.js"
+      integrity="sha512-QlM6B393C0vSZkj8UhK4NCgfULmwlkACC5VB4oaNRuuhds7UeEhxywzr0GFpL7A7R0SBDZPsqOU8v4eu2Lk3ag=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script src="./snippets.js" defer></script>
+    <script src="./shapes.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>

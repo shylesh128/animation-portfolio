@@ -1,0 +1,27 @@
+const suggestions = [
+  "drawRectangle(ctx, x, y, width, height)",
+  "drawCircle(ctx, x, y, radius)",
+  "drawLeaf(ctx, x, y, size, color)",
+  "drawPolygon(ctx, x, y, radius, sides)",
+  "drawStar(ctx, x, y, radius, spikes)",
+  "drawHeart(ctx, x, y, size)",
+  "drawButterFly(ctx, x, y, size)",
+  "drawDiamond(ctx, x, y, size)",
+  "drawOval(ctx, x, y, size)",
+  "drawLine(ctx, startX, startY, endX, endY, color)",
+  "drawRoundedRectangle(ctx, x, y, size)",
+  "drawArrow(ctx, x, y, size, color)",
+  "drawSpiral(ctx, x, y, size)",
+  "drawCloud(ctx, x, y, size)",
+  "drawSplash(ctx, x, y, size, color)",
+  "drawStarburst(ctx, x, y, size)",
+  "drawCrescent(ctx, x, y, size)",
+  "drawCross(ctx, x, y, size, color)",
+  "current(ctx)",
+  "drawSineWave(ctx, x, y, amplitude, frequency, color)",
+  "drawCosWave(ctx, x, y, amplitude, frequency, color)",
+  "drawTanWave(ctx, x, y, amplitude, frequency, color)",
+  "leafs(ctx)",
+];
+
+window.snippets = suggestions;
