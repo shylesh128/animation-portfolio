@@ -173,6 +173,20 @@ function createFlare(x, y, size) {
   flareContainer.appendChild(flare);
 }
 
+function createFlare(x, y, size) {
+  const flareContainer = document.createElement("div");
+  flareContainer.id = "flareContainer";
+  document.body.appendChild(flareContainer);
+
+  const flare = document.createElement("div");
+  flare.className = "flare";
+  flare.style.width = size + "px";
+  flare.style.height = size + "px";
+  flare.style.left = x - size / 2 + "px";
+  flare.style.top = y - size / 2 + "px";
+  flareContainer.appendChild(flare);
+}
+
 function createFlareLine(x, y, size) {
   const flareContainer = document.createElement("div");
   flareContainer.id = "flareContainer";
@@ -184,6 +198,43 @@ function createFlareLine(x, y, size) {
   flare.style.left = x - size / 2 + "px";
   flare.style.top = y - 1 + "px";
   flareContainer.appendChild(flare);
+}
+
+function getRandomCoordinate(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function getRandomSize(minSize, maxSize) {
+  return Math.floor(Math.random() * (maxSize - minSize + 1)) + minSize;
+}
+
+function createRandomDot() {
+  const xMin = 250; // Minimum X coordinate for the specific area
+  const xMax = 1000; // Maximum X coordinate for the specific area
+  const yMin = 180; // Minimum Y coordinate for the specific area
+  const yMax = 350; // Maximum Y coordinate for the specific area
+
+  const x = getRandomCoordinate(xMin, xMax);
+  const y = getRandomCoordinate(yMin, yMax);
+  const size = getRandomSize(20, 25);
+
+  const dotContainer = document.getElementById("glowing-line-container");
+
+  const dot = document.createElement("div");
+  dot.className = "dot";
+  dot.style.width = size + "px";
+  dot.style.height = size + "px";
+  dot.style.left = x - size / 2 + "px";
+  dot.style.top = y - size / 2 + "px";
+  dotContainer.appendChild(dot);
+}
+
+// Specify the number of dots you want to create here
+const numberOfDots = 200;
+
+// Create random dots based on the specified number
+for (let i = 0; i < numberOfDots; i++) {
+  createRandomDot();
 }
 
 createFlare(344, 245, 20);

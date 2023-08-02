@@ -157,6 +157,19 @@ h1 {
   transform-origin: center;
 }
 
+.dot {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 10;
+  background: radial-gradient(
+    ellipse closest-side,
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.1)
+  );
+  animation: dotAnimation 3.5s linear, fade-away 3s 6.5s linear forwards;
+  transform-origin: center;
+}
+
 @keyframes flareLineAnimation {
   0% {
     transform: scaleX(0.1);
@@ -166,6 +179,21 @@ h1 {
   }
   80% {
     transform: scaleX(0.9);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes dotAnimation {
+  0% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scaleX(1);
+  }
+  80% {
+    transform: scaleX(1);
   }
   100% {
     transform: scaleX(1);

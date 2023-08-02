@@ -62,12 +62,27 @@ var animations = [
     duration: "1 minute",
     link: "./single-cube/index.html",
   },
-
-  // Add more objects for additional animations
+  {
+    imageSrc: "./images/html-complier.png",
+    altText: "Preview: HTML Compiler with output",
+    title: "HTML compiler",
+    description:
+      "An interactive code editor offering real-time previews, code suggestions, and handy formatting tools for web development.",
+    duration: "1 minute",
+    link: "./html/index.html",
+  },
+  {
+    imageSrc: "./images/canva-complier.png",
+    altText: "Preview: Canva Compiler with output",
+    title: "Canva compiler",
+    description:
+      "An interactive code editor offering real-time previews, code suggestions, and handy formatting tools for canva development.",
+    duration: "1 minute",
+    link: "./canva/index.html",
+  },
 ];
 
 function addCard(imageSrc, altText, title, description, duration, link) {
-  // Create the necessary HTML elements
   var cardContainer = document.createElement("div");
   cardContainer.className = "card";
 
@@ -80,22 +95,13 @@ function addCard(imageSrc, altText, title, description, duration, link) {
 
   var descParagraph = document.createElement("p");
   descParagraph.textContent = description;
-
-  // var durationParagraph = document.createElement("p");
-  // durationParagraph.textContent = "Duration: " + duration;
-
-  // Create a click event listener on the card container
   cardContainer.addEventListener("click", function () {
     window.open(link, "_blank");
   });
 
-  // Append the elements to the card container
   cardContainer.appendChild(image);
   cardContainer.appendChild(heading);
   cardContainer.appendChild(descParagraph);
-  // cardContainer.appendChild(durationParagraph);
-
-  // Append the card container to the grid container
   var gridContainer = document.querySelector(".grid-container");
   gridContainer.appendChild(cardContainer);
 }
