@@ -118,3 +118,30 @@ body {
 #searchInput::placeholder {
   color: #aaa;
 }
+
+@media (max-width: 768px) {
+  #container {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  #code-editor {
+    flex: 0 0 60vh; /* Adjust this value to the desired height of the editor section */
+    height: 60vh; /* Adjust this value to the desired height of the editor section */
+    border-radius: 0;
+    box-shadow: none;
+    padding: 1rem;
+  }
+
+  #code-editor textarea {
+    min-height: 45vh; /* Adjust this value to the desired height of the textarea */
+    max-height: 45vh; /* Adjust this value to the desired height of the textarea */
+  }
+
+  #canvas-container {
+    flex: 1;
+    border-left: none;
+    border-top: 1px solid #fff;
+  }
+}
