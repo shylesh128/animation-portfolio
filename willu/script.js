@@ -13,7 +13,7 @@ if (screenSize <= 768) {
   }
 } else {
   for (var i = 0; i < 16; i++) {
-    images[i] = "https://source.unsplash.com/random/1920x1080/?romantic," + i;
+    images[i] = "https://source.unsplash.com/random/768x1024/?romantic," + i;
   }
 }
 
