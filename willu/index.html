@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Will you be mine?</title>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+      body {
+        font-family: cursive;
+        background-image: url("https://source.unsplash.com/random/1920x1080/?romantic");
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        overflow: hidden;
+        transition: background-image 0.5s ease;
+      }
+      .modal-content {
+        background-color: rgba(255, 255, 255, 0.9);
+        border: 5px double #ff6b81;
+        width: 90%;
+        max-width: 350px;
+        padding: 30px;
+        text-align: center;
+        position: relative;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 25px;
+      }
+      p {
+        font-size: 24px;
+      }
+      .buttons {
+        margin-top: 20px;
+      }
+      button {
+        padding: 10px;
+        margin: 10px;
+        cursor: pointer;
+        border: none;
+        background-color: #ff6b81;
+        color: white;
+        font-weight: bold;
+        border-radius: 15px;
+        font-size: 18px;
+        transition: 0.3s;
+      }
+      button:hover {
+        background-color: #ff8a9d;
+        transform: scale(1.1);
+      }
+      @media only screen and (max-width: 768px) {
+        .modal-content {
+          padding: 10px;
+        }
+        button {
+          padding: 5px;
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="modal" id="myModal">
+      <div class="modal-content">
+        <p id="question">Will you be mine? 🌹</p>
+        <div class="buttons">
+          <button id="Close1" onclick="answerYes()">Yes 😊</button>
+          <button id="Close2" onclick="answerNo()">No 😢</button>
+        </div>
+        <div id="message"></div>
+      </div>
+    </div>
+    <script>
+      var question = document.getElementById("question");
+      var message = document.getElementById("message");
+      var button1 = document.getElementById("Close1");
+      var button2 = document.getElementById("Close2");
+      var noCount = 0;
+
+      // Step 1: Define the images to preload
+      var images = [];
+      for (var i = 0; i < 16; i++) {
+        images[i] =
+          "https://source.unsplash.com/random/1920x1080/?romantic," + i;
+      }
+
+      // Step 2: Preload the images
+      var preloadedImages = [];
+      for (var i = 0; i < images.length; i++) {
+        preloadedImages[i] = new Image();
+        preloadedImages[i].src = images[i];
+      }
+
+      function answerYes() {
+        question.innerHTML = "";
+        message.innerHTML = "I love you a lot for giving me a chance. 💖";
+        button1.style.display = "none";
+        button2.style.display = "none";
+      }
+
+      function answerNo() {
+        var modalContent = document.querySelector(".modal-content");
+        modalContent.style.opacity = 0;
+        noCount++;
+
+        // Step 3: Change the background image using preloaded images
+        if (noCount < images.length) {
+          document.body.style.backgroundImage =
+            'url("' + images[noCount] + '")';
+        }
+
+        setTimeout(function () {
+          switch (noCount) {
+            case 1:
+              question.innerHTML = "Really? 🙁 Please give it another chance!";
+              break;
+            case 2:
+              question.innerHTML = "Still no? 😔 How about now?";
+              break;
+            case 3:
+              question.innerHTML = "Please reconsider! 💔";
+              break;
+            case 4:
+              question.innerHTML = "I promise to be the best! 🌺";
+              break;
+            case 5:
+              question.innerHTML = "Kudki please? 🌟";
+              break;
+            case 6:
+              question.innerHTML = "Let's give it a shot? 🥺";
+              break;
+            case 7:
+              question.innerHTML = "I'll wait for you forever! ⏳";
+              break;
+            case 8:
+              question.innerHTML = "I believe in us! 💑";
+              break;
+            case 9:
+              question.innerHTML = "Just one chance! 🙏";
+              break;
+            case 10:
+              question.innerHTML =
+                "I'm really heartbroken. 😭 Can you please reconsider?";
+              break;
+            case 11:
+              question.innerHTML = "I know we can make it! 🌈";
+              break;
+            case 12:
+              question.innerHTML = "Trust me on this one! 🌟";
+              break;
+            case 13:
+              question.innerHTML = "Let's try together! 💑";
+              break;
+            case 14:
+              question.innerHTML = "I won't let you down! 💪";
+              break;
+            case 15:
+              question.innerHTML = "Give me a chance, I'll prove it! 🏆";
+              break;
+            default:
+              question.innerHTML = "I love you and I will  😘💕💕";
+              break;
+          }
+          modalContent.style.opacity = 1;
+        }, 500);
+      }
+    </script>
+  </body>
+</html>

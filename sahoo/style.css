@@ -15,9 +15,9 @@ body {
   position: absolute;
   width: 0;
   height: 2px;
-  background-color: rgb(255, 255, 255); /* Blue color for the line */
+  background-color: rgb(255, 255, 255);
   box-shadow: 0 0 10px rgb(255, 255, 255), 0 0 20px rgb(255, 255, 255),
-    0 0 30px rgb(255, 255, 255); /* Glowing effect */
+    0 0 30px rgb(255, 255, 255);
   animation: fade-away 1s 7s linear forwards;
 }
 
@@ -39,24 +39,8 @@ body {
   position: absolute;
   top: 3px;
   animation: fade-in 6s 1s ease-out forwards, fade-away 3s 7s linear forwards;
+  /* animation: fade-in 6s 1s ease-out forwards; */
 }
-
-/* h1 {
-  font-family: "Saaho Font";
-  background: radial-gradient(
-    circle,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(194, 194, 203, 0.08184523809523814) 12%,
-    rgb(255, 255, 255) 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  text-align: center;
-  font-size: 128px;
-  opacity: 0;
-  animation: fade-in 6s 1s ease-out forwards; 
-} */
 
 h1 {
   font-family: "Saaho Font";
