@@ -80,6 +80,14 @@ var animations = [
     duration: "1 minute",
     link: "./canva/index.html",
   },
+  {
+    imageSrc: "./images/sahoo.png",
+    altText: "Preview: Sahoo title",
+    title: "Sahoo Title",
+    description: "A replica of Sahoo title card.",
+    duration: "1 minute",
+    link: "./sahoo/index.html",
+  },
 ];
 
 function addCard(imageSrc, altText, title, description, duration, link) {

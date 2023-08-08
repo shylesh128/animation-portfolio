@@ -230,7 +230,7 @@ function createRandomDot() {
 }
 
 // Specify the number of dots you want to create here
-const numberOfDots = 200;
+const numberOfDots = 0;
 
 // Create random dots based on the specified number
 for (let i = 0; i < numberOfDots; i++) {
