@@ -127,16 +127,16 @@ body {
   }
 
   #code-editor {
-    flex: 0 0 60vh; /* Adjust this value to the desired height of the editor section */
-    height: 60vh; /* Adjust this value to the desired height of the editor section */
+    flex: 0 0 60vh;
+    height: 60vh;
     border-radius: 0;
     box-shadow: none;
     padding: 1rem;
   }
 
   #code-editor textarea {
-    min-height: 45vh; /* Adjust this value to the desired height of the textarea */
-    max-height: 45vh; /* Adjust this value to the desired height of the textarea */
+    min-height: 45vh;
+    max-height: 45vh;
   }
 
   #canvas-container {
