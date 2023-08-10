@@ -94,7 +94,7 @@ var animations = [
     title: "Snake game",
     description: "A replica of Sahoo title card.",
     duration: "1 minute",
-    link: "./snale/index.html",
+    link: "./snake/index.html",
   },
 ];
 
