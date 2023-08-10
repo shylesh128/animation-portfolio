@@ -79,6 +79,7 @@ button:hover {
 
   .game-container {
     height: 60vh; /* Increased the height */
+    width: 90vw;
   }
 
   .mobile-controls {
