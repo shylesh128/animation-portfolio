@@ -83,10 +83,53 @@ button:hover {
   }
 
   .mobile-controls {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 10px;
-    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .dpad {
+    position: relative;
+    width: 100px;
+    height: 100px;
+  }
+
+  .dpad-button {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--snake-color);
+    border: none;
+    color: white;
+    transition: background-color 0.3s;
+    font-size: 16px;
+  }
+
+  .dpad-button:hover {
+    background-color: var(--secondary-text);
+  }
+
+  .dpad-up {
+    top: 0;
+    left: 35px;
+  }
+
+  .dpad-down {
+    bottom: 0;
+    left: 35px;
+  }
+
+  .dpad-left {
+    left: 0;
+    top: 35px;
+  }
+
+  .dpad-right {
+    right: 0;
+    top: 35px;
   }
 
   .mobile-controls button {
