@@ -32,7 +32,6 @@ body {
   height: 10px;
   position: absolute;
   background-color: var(--snake-color);
-  transition: 0.1s ease-in-out;
   border-radius: 50%;
   box-shadow: 0 0 10px rgba(var(--snake-color), 0.5);
 }
@@ -78,7 +77,6 @@ button:hover {
   }
 
   .game-container {
-    width: 90%;
     height: 60vh; /* Increased the height */
   }
 

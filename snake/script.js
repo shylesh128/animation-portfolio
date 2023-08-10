@@ -137,22 +137,40 @@ function checkCollision() {
   );
 
   if (distanceToFood <= 10) {
-    // Adjust this value to make eating the food easier or harder
-    const tail = snakeSegments[snakeSegments.length - 1];
-    const newTail = { x: tail.x, y: tail.y, el: document.createElement("div") };
-    newTail.el.className = "snake";
-    newTail.el.style.left = `${tail.x}px`;
-    newTail.el.style.top = `${tail.y}px`;
-    snakeSegments.push(newTail);
-    gameContainer.appendChild(newTail.el);
+    // Determine how many segments to add based on current points
+    let segmentsToAdd = 1;
+    if (points >= 50 && points < 100) segmentsToAdd = 2;
+    else if (points >= 100) segmentsToAdd = 3;
+
+    // Add the determined number of segments
+    for (let i = 0; i < segmentsToAdd; i++) {
+      const tail = snakeSegments[snakeSegments.length - 1];
+      const newTail = {
+        x: tail.x,
+        y: tail.y,
+        el: document.createElement("div"),
+      };
+      newTail.el.className = "snake";
+      newTail.el.style.left = `${tail.x}px`;
+      newTail.el.style.top = `${tail.y}px`;
+      snakeSegments.push(newTail);
+      gameContainer.appendChild(newTail.el);
+    }
+
     updateFoodPosition();
     points += 10;
     updatePoints();
+
+    // Increase the speed if points are greater than or equal to 100
+    if (points >= 100) {
+      snakeSpeed += 0.1; // Adjust this value to control the speed increase
+    }
   }
 }
 
 function createInitialSnake() {
-  for (let i = 0; i < 3; i++) {
+  const initialLength = 100; // Change this value to set the initial length
+  for (let i = 0; i < initialLength; i++) {
     const segment = document.createElement("div");
     segment.className = "snake";
     segment.style.left = `${i * 20}px`; // Set the initial x-coordinate
