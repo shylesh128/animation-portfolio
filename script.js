@@ -88,6 +88,14 @@ var animations = [
     duration: "1 minute",
     link: "./sahoo/index.html",
   },
+  {
+    imageSrc: "./images/sahoo.png",
+    altText: "Preview: snake title",
+    title: "Snake game",
+    description: "A replica of Sahoo title card.",
+    duration: "1 minute",
+    link: "./snale/index.html",
+  },
 ];
 
 function addCard(imageSrc, altText, title, description, duration, link) {

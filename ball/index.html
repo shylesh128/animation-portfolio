@@ -59,15 +59,15 @@
     <script>
       var container = document.getElementById("container");
       var balls = [];
-      var maxBalls = 20; // Maximum number of balls allowed
+      var maxBalls = 25; // Maximum number of balls allowed
       var collisionCount = 0; // Collision count variable
       var collisionThreshold = 200; // Number of collisions required before creating a new ball
       var ballsCreated = 0; // Number of balls created
 
       var containerWidth = container.offsetWidth;
       var containerHeight = container.offsetHeight;
-      var maxX = containerWidth - 50;
-      var maxY = containerHeight - 50;
+      var maxX = containerWidth - 20;
+      var maxY = containerHeight - 20;
 
       function getRandomColor() {
         var letters = "0123456789ABCDEF";
@@ -141,7 +141,7 @@
 
                 // Increment the collision count and update the display
                 collisionCount++;
-                updateCollisionCount();
+                // updateCollisionCount();
 
                 if (
                   collisionCount >= collisionThreshold &&
@@ -161,7 +161,7 @@
             }
           }
 
-          ball.style.transform = "translate(" + posX + "px," + posY + "px)";
+          ball.style.transform = `translate(${posX}px, ${posY}px)`;
 
           requestAnimationFrame(moveBall);
         }
@@ -185,11 +185,6 @@
         ballCountElement.textContent = "Balls: " + balls.length;
       }
 
-      function updateCollisionCount() {
-        var collisionCountElement = document.getElementById("collision-count");
-        collisionCountElement.textContent = "Collisions: " + collisionCount;
-      }
-
       function addBall() {
         createBall();
       }
@@ -203,7 +198,7 @@
         // Reset the collision count
         collisionCount = 0;
         updateBallCount();
-        updateCollisionCount();
+        // updateCollisionCount();
       }
 
       // Create multiple balls
