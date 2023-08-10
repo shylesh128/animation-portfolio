@@ -79,7 +79,39 @@ button:hover {
 
   .game-container {
     width: 90%;
-    height: 200px;
+    height: 60vh; /* Increased the height */
+  }
+
+  .mobile-controls {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    margin-top: 20px;
+  }
+
+  .mobile-controls button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    font-size: 24px; /* Increased font size for better visibility */
+    flex: 1;
+  }
+
+  #up {
+    grid-column: 2;
+  }
+
+  #left {
+    grid-column: 1;
+  }
+
+  #right {
+    grid-column: 3;
+  }
+
+  #down {
+    grid-column: 2;
   }
 }
 
