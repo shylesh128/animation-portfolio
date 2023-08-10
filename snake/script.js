@@ -1,9 +1,16 @@
 const gameContainer = document.querySelector(".game-container");
 const snake = document.querySelector(".snake");
 const food = document.querySelector(".food");
+let automated = false;
+
+const toggleAutoButton = document.getElementById("toggleAuto");
+
+toggleAutoButton.addEventListener("click", () => {
+  automated = !automated;
+});
 
 let snakeSegments = [{ x: 0, y: 0, el: snake }];
-let snakeSpeed = 1;
+let snakeSpeed = 2;
 let foodX = 0;
 let foodY = 0;
 let points = 0;
@@ -17,11 +24,31 @@ const startButton = document.getElementById("start");
 const pauseButton = document.getElementById("pause");
 const restartButton = document.getElementById("restart");
 
+function autoMoveSnake() {
+  if (!automated) return;
+  const head = snakeSegments[0];
+  if (head.x < foodX) {
+    snakeXSpeed = snakeSpeed;
+    snakeYSpeed = 0;
+  } else if (head.x > foodX) {
+    snakeXSpeed = -snakeSpeed;
+    snakeYSpeed = 0;
+  } else if (head.y < foodY) {
+    snakeXSpeed = 0;
+    snakeYSpeed = snakeSpeed;
+  } else if (head.y > foodY) {
+    snakeXSpeed = 0;
+    snakeYSpeed = -snakeSpeed;
+  }
+}
+
 function getRandomPosition() {
   return (
     Math.floor(
-      Math.random() * ((gameContainer.clientWidth - food.clientWidth) / 10)
-    ) * 10
+      Math.random() * ((gameContainer.clientWidth - food.clientWidth - 50) / 10)
+    ) *
+      10 +
+    10
   );
 }
 
@@ -53,15 +80,19 @@ pauseButton.addEventListener("click", togglePause);
 restartButton.addEventListener("click", restartGame);
 
 function moveSnake() {
-  const removedSegment = snakeSegments.pop();
-  removedSegment.x = snakeSegments[0].x + snakeXSpeed;
-  removedSegment.y = snakeSegments[0].y + snakeYSpeed;
-  snakeSegments.unshift(removedSegment);
+  const tail = snakeSegments.pop();
+  const head = snakeSegments[0];
 
-  for (let i = 0; i < snakeSegments.length; i++) {
-    snakeSegments[i].el.style.left = `${snakeSegments[i].x}px`;
-    snakeSegments[i].el.style.top = `${snakeSegments[i].y}px`;
-  }
+  const newHead = {
+    x: head.x + snakeXSpeed,
+    y: head.y + snakeYSpeed,
+    el: tail.el,
+  };
+
+  newHead.el.style.left = `${newHead.x}px`;
+  newHead.el.style.top = `${newHead.y}px`;
+
+  snakeSegments.unshift(newHead);
 }
 
 document.addEventListener("keydown", (e) => {
@@ -119,7 +150,6 @@ function checkCollision() {
     head.x >= gameContainer.clientWidth ||
     head.y >= gameContainer.clientHeight
   ) {
-    // Re-position snake to the center
     snakeSegments = [
       {
         x: gameContainer.clientWidth / 2,
@@ -137,12 +167,10 @@ function checkCollision() {
   );
 
   if (distanceToFood <= 10) {
-    // Determine how many segments to add based on current points
     let segmentsToAdd = 1;
     if (points >= 50 && points < 100) segmentsToAdd = 2;
     else if (points >= 100) segmentsToAdd = 3;
 
-    // Add the determined number of segments
     for (let i = 0; i < segmentsToAdd; i++) {
       const tail = snakeSegments[snakeSegments.length - 1];
       const newTail = {
@@ -158,30 +186,27 @@ function checkCollision() {
     }
 
     updateFoodPosition();
+
     points += 10;
     updatePoints();
-
-    // Increase the speed if points are greater than or equal to 100
-    if (points >= 100) {
-      snakeSpeed += 0.1; // Adjust this value to control the speed increase
-    }
   }
 }
 
 function createInitialSnake() {
-  const initialLength = 100; // Change this value to set the initial length
+  const initialLength = 100;
   for (let i = 0; i < initialLength; i++) {
     const segment = document.createElement("div");
     segment.className = "snake";
-    segment.style.left = `${i * 20}px`; // Set the initial x-coordinate
-    segment.style.top = `0px`; // Set the initial y-coordinate
-    snakeSegments.push({ x: i * 20, y: 0, el: segment }); // 20 instead of snakeSpeed for consistent sizing
+    segment.style.left = `${i * 20}px`;
+    segment.style.top = `0px`;
+    snakeSegments.push({ x: i * 20, y: 0, el: segment });
     gameContainer.appendChild(segment);
   }
 }
 
 function gameLoop() {
   if (!paused) {
+    autoMoveSnake();
     moveSnake();
     checkCollision();
   }

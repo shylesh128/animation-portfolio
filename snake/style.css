@@ -17,8 +17,8 @@ body {
 }
 
 .game-container {
-  width: 400px;
-  height: 400px;
+  width: 500px;
+  height: 500px;
   border: 5px solid var(--primary-text);
   position: relative;
   background-color: var(--secondary-bg);
@@ -37,8 +37,9 @@ body {
 }
 
 .food {
-  width: 5px;
-  height: 5px;
+  width: 10px;
+  height: 10px;
+  z-index: 10;
   background-color: var(--food-color);
   box-shadow: 0 0 10px rgba(var(--food-color), 0.5);
 }
@@ -94,8 +95,8 @@ button:hover {
 
   .dpad-button {
     position: absolute;
-    width: 50px; /* Increase the size of the buttons */
-    height: 50px; /* Increase the size of the buttons */
+    width: 60px; /* Increased the size of the buttons */
+    height: 60px; /* Increased the size of the buttons */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -103,9 +104,9 @@ button:hover {
     border: none;
     color: white;
     transition: background-color 0.3s;
-    font-size: 24px; /* Increase the size of the arrow icons */
+    font-size: 32px; /* Increased the size of the arrow icons */
+    border-radius: 10px; /* Added some rounded corners */
   }
-
   .dpad-up {
     top: 0;
     left: 50px;

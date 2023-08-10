@@ -89,10 +89,11 @@ var animations = [
     link: "./sahoo/index.html",
   },
   {
-    imageSrc: "./images/sahoo.png",
+    imageSrc: "./images/snake.png",
     altText: "Preview: snake title",
-    title: "Snake game",
-    description: "A replica of Sahoo title card.",
+    title: "Serpent's Feast",
+    description:
+      "Play this Serpent, guiding a snake through mazes to eat glowing food. Choose to control or set it on an automatic path for fun and strategy.",
     duration: "1 minute",
     link: "./snake/index.html",
   },
