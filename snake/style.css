@@ -90,14 +90,14 @@ button:hover {
 
   .dpad {
     position: relative;
-    width: 100px;
-    height: 100px;
+    width: 150px; /* Increase the size of the container */
+    height: 150px; /* Increase the size of the container */
   }
 
   .dpad-button {
     position: absolute;
-    width: 30px;
-    height: 30px;
+    width: 50px; /* Increase the size of the buttons */
+    height: 50px; /* Increase the size of the buttons */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -105,31 +105,27 @@ button:hover {
     border: none;
     color: white;
     transition: background-color 0.3s;
-    font-size: 16px;
-  }
-
-  .dpad-button:hover {
-    background-color: var(--secondary-text);
+    font-size: 24px; /* Increase the size of the arrow icons */
   }
 
   .dpad-up {
     top: 0;
-    left: 35px;
+    left: 50px;
   }
 
   .dpad-down {
     bottom: 0;
-    left: 35px;
+    left: 50px;
   }
 
   .dpad-left {
     left: 0;
-    top: 35px;
+    top: 50px;
   }
 
   .dpad-right {
     right: 0;
-    top: 35px;
+    top: 50px;
   }
 
   .mobile-controls button {
