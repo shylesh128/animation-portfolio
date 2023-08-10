@@ -3,7 +3,7 @@ const snake = document.querySelector(".snake");
 const food = document.querySelector(".food");
 
 let snakeSegments = [{ x: 0, y: 0, el: snake }];
-let snakeSpeed = 2;
+let snakeSpeed = 1;
 let foodX = 0;
 let foodY = 0;
 let points = 0;
