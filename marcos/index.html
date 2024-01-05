@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <code>
+      Sub SendMultipleEmails() Dim OutApp As Object, OutMail As Object, lastRow
+      As Integer, r As Integer Dim bodyHeader As String, bodyMain As String,
+      bodySignature As String Set OutApp = CreateObject("Outlook.Application")
+      lastRow = Cells(Rows.Count, "B").End(xlUp).Row bodySignature =
+      "Sincerely," & vbLf & "Excel Macro Mania" For r = 2 To lastRow Set OutMail
+      = OutApp.CreateItem(0) With OutMail .To = Range("C" & r).Value .Subject =
+      Range("D2").Value 'email body with various components bodyHeader = "Dear "
+      & Range("A" & r).Value & "," bodyMain = Range("E2").Value .Body =
+      bodyHeader & vbLf & vbLf & bodyMain & vbLf & vbLf & bodySignature .Display
+      'optional '.Send 'uncomment to send End With Next r Set OutMail = Nothing
+      Set OutApp = Nothing End Sub
+    </code>
+  </body>
+</html>

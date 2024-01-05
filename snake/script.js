@@ -10,7 +10,7 @@ toggleAutoButton.addEventListener("click", () => {
 });
 
 let snakeSegments = [{ x: 0, y: 0, el: snake }];
-let snakeSpeed = 2;
+let snakeSpeed = 5;
 let foodX = 0;
 let foodY = 0;
 let points = 0;

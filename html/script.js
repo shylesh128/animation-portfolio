@@ -33,8 +33,6 @@ function insertSnippet(snippet) {
     startPos + snippet.value.length
   );
 }
-
-// Function to display suggestions based on the type
 function showSuggestions(snippets) {
   const suggestionsContainer = document.getElementById("suggestions-container");
   suggestionsContainer.innerHTML = "";
@@ -53,13 +51,9 @@ function showSuggestions(snippets) {
   suggestionsContainer.style.display = "block";
 }
 
-// Event listeners for the buttons
 document
   .getElementById("html-snippet-btn")
   .addEventListener("click", () => showSuggestions(window.htmlSnippets));
 document
   .getElementById("css-snippet-btn")
   .addEventListener("click", () => showSuggestions(window.cssSnippets));
-// document
-//   .getElementById("js-snippet-btn")
-//   .addEventListener("click", () => showSuggestions(jsSnippets));

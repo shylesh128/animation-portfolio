@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fibonacci Spiral</title>
+    <style>
+      canvas {
+        border: 1px solid #ddd;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="fibonacciCanvas" width="600" height="600"></canvas>
+
+    <script>
+      // Function to generate Fibonacci sequence
+      function generateFibonacci(n) {
+        const sequence = [0, 1];
+        for (let i = 2; i < n; i++) {
+          sequence.push(sequence[i - 1] + sequence[i - 2]);
+        }
+        return sequence;
+      }
+
+      // Function to plot points along the Fibonacci spiral on canvas
+      function plotFibonacciSpiral(canvas, fibonacciSequence) {
+        const ctx = canvas.getContext("2d");
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        const scaleFactor = 5;
+
+        ctx.beginPath();
+        fibonacciSequence.forEach((num, index) => {
+          const angle = index * 0.2;
+          const radius = scaleFactor * Math.sqrt(index);
+          const x = centerX + radius * Math.cos(angle);
+          const y = centerY + radius * Math.sin(angle);
+
+          if (index === 0) {
+            ctx.moveTo(x, y);
+          } else {
+            ctx.lineTo(x, y);
+          }
+        });
+
+        ctx.strokeStyle = "blue";
+        ctx.stroke();
+      }
+
+      // Set the number of Fibonacci numbers to generate
+      const numberOfFibonacciNumbers = 1200;
+
+      // Generate and plot the Fibonacci sequence on canvas
+      const fibonacciSequence = generateFibonacci(numberOfFibonacciNumbers);
+      const canvasElement = document.getElementById("fibonacciCanvas");
+      plotFibonacciSpiral(canvasElement, fibonacciSequence);
+    </script>
+  </body>
+</html>

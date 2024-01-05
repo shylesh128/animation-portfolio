@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Professional Stopwatch</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f4f4f4;
+      }
+
+      #stopwatch {
+        background-color: #fff;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      #time {
+        font-size: 5em;
+        margin-bottom: 20px;
+      }
+
+      #buttons {
+        display: flex;
+        justify-content: space-between;
+        gap: 1;
+      }
+
+      button {
+        padding: 15px 30px;
+        font-size: 1.5em;
+        cursor: pointer;
+        border: none;
+        border-radius: 8px;
+        background-color: #3498db;
+        color: #fff;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #2980b9;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="stopwatch">
+      <div id="time">00:00.000</div>
+      <div id="buttons">
+        <button id="startStop">Start</button>
+        <button id="reset">Reset</button>
+      </div>
+    </div>
+
+    <script>
+      let timer;
+      let running = false;
+      let milliseconds = 0;
+      let seconds = 0;
+      let minutes = 0;
+
+      function updateDisplay() {
+        const timeDisplay = document.getElementById("time");
+        timeDisplay.textContent = `${String(minutes).padStart(2, "0")}:${String(
+          seconds
+        ).padStart(2, "0")}.${String(milliseconds).padStart(3, "0")}`;
+      }
+
+      function startStop() {
+        if (running) {
+          clearInterval(timer);
+          document.getElementById("startStop").textContent = "Start";
+        } else {
+          timer = setInterval(() => {
+            milliseconds += 10;
+            if (milliseconds === 1000) {
+              milliseconds = 0;
+              seconds++;
+            }
+            if (seconds === 60) {
+              seconds = 0;
+              minutes++;
+            }
+            updateDisplay();
+          }, 10);
+          document.getElementById("startStop").textContent = "Stop";
+        }
+        running = !running;
+      }
+
+      function reset() {
+        clearInterval(timer);
+        running = false;
+        milliseconds = 0;
+        seconds = 0;
+        minutes = 0;
+        updateDisplay();
+        document.getElementById("startStop").textContent = "Start";
+      }
+
+      function handleSpaceBar(event) {
+        if (event.code === "Space") {
+          if (event.type === "keydown") {
+            startStop();
+          } else if (event.type === "keyup") {
+            // Add any additional actions on space bar release (optional)
+          }
+        }
+      }
+
+      document.getElementById("startStop").addEventListener("click", startStop);
+      document.getElementById("reset").addEventListener("click", reset);
+
+      document.addEventListener("keydown", handleSpaceBar);
+      document.addEventListener("keyup", handleSpaceBar);
+    </script>
+  </body>
+</html>

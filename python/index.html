@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/brython@3.8.9/brython.min.js"
+    ></script>
+  </head>
+
+  <body onload="brython()">
+    <div>
+      <h1>online python</h1>
+      <textarea></textarea>
+    </div>
+    <script type="text/javascript">
+      function Rectangle(x0, y0, x1, y1) {
+        this.x0 = x0;
+        this.y0 = y0;
+        this.x1 = x1;
+        this.y1 = y1;
+        this.surface = function () {
+          return (x1 - x0) * (y1 - y0);
+        };
+      }
+    </script>
+
+    <script type="text/python">
+      from browser import document
+      from browser.html import A,B
+
+      document <= B("Brython") + "is an implementation of "
+      document <= A("Python", href="http://www.python.org") + " for web browsers"
+    </script>
+  </body>
+</html>

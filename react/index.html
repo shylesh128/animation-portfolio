@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Code Previewer</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .container {
+        width: 80%;
+        max-width: 800px;
+      }
+      textarea {
+        width: 100%;
+        height: 200px;
+        padding: 10px;
+      }
+      #preview {
+        margin-top: 20px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        min-height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>React Code Previewer</h1>
+      <textarea
+        id="codeInput"
+        placeholder="Enter your React code here"
+      ></textarea>
+      <button id="renderButton">Render</button>
+      <div id="preview"></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    <script type="text/babel">
+      const codeInput = document.getElementById("codeInput");
+      const renderButton = document.getElementById("renderButton");
+      const preview = document.getElementById("preview");
+
+      renderButton.addEventListener("click", updatePreview);
+
+      function updatePreview() {
+        const code = codeInput.value;
+        try {
+          const compiledCode = Babel.transform(code, {
+            presets: ["es2015", "react"],
+          }).code;
+
+          // Create a dynamic function from the compiled code
+          const renderFunction = new Function(
+            "React",
+            "ReactDOM",
+            compiledCode
+          );
+
+          // Clear previous content from preview
+          ReactDOM.unmountComponentAtNode(preview);
+
+          // Render the component using the dynamic function
+          renderFunction(React, ReactDOM);
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      }
+    </script>
+  </body>
+</html>
